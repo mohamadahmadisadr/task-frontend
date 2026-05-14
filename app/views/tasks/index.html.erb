@@ -1,0 +1,28 @@
+<h1>Tasks</h1>
+
+<%= link_to "New Task", new_task_path %>
+
+<hr>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <strong><%= task["name"] %></strong>
+
+      —
+      <%= task["done"] ? "✅ Done" : "❌ Pending" %>
+
+      |
+      <%= link_to "Show", task_path(task["id"]) %>
+
+      |
+      <%= link_to "Edit", edit_task_path(task["id"]) %>
+
+      |
+      <%= button_to "Delete",
+            task_path(task["id"]),
+            method: :delete,
+            form: { style: "display:inline;" } %>
+    </li>
+  <% end %>
+</ul>

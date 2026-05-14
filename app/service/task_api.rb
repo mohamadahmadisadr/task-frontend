@@ -1,26 +1,27 @@
 class TaskApi
-    BASE_URL = "https://localhost:8080"
+    BASE_URL = "http://localhost:8080"
 
     def self.all
-        faraday.get("#{BASE_URL}/tasks")
+        Faraday.get("#{BASE_URL}/tasks")
     end
 
     def self.find(id)
-        faraday.get("#{BASE_URL}/tasks/#{id}")
+        Faraday.get("#{BASE_URL}/tasks/#{id}")
+    end
 
-    def self.delete
-        faraday.get("#{BASE_URL}/tasks/#{id}")
+    def self.delete(id)
+        Faraday.delete("#{BASE_URL}/tasks/#{id}")
     end
 
     def self.create(params)
-        faraday.post("#{BASE_URL}/tasks") do |req|
+        Faraday.post("#{BASE_URL}/tasks") do |req|
             req.headers["Content-Type"] = "application/json"
             req.body = params.to_json
         end
     end
 
     def self.update(params)
-        faraday.put("#{BASE_URL}/tasks/#{id}") do |req|
+        Faraday.put("#{BASE_URL}/tasks/#{params[:id]}") do |req|
             req.headers["Content-Type"] = "application/json"
             req.body = params.to_json
         end

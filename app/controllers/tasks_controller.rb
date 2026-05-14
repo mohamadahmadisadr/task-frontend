@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
     def index
-        response TaskApi.all
+        response = TaskApi.all
         @tasks = JSON.parse(response.body)
     end
 
@@ -23,7 +23,7 @@ class TasksController < ApplicationController
     end
 
     def update 
-        TaskApi.put(task_params)
+        TaskApi.update(task_params)
         redirect_to tasks_path
     end
 
@@ -37,6 +37,7 @@ class TasksController < ApplicationController
 
     def task_params
         {
+            id: params[:id],
             name: params[:name],
             done: params[:done] == "1"
         }
